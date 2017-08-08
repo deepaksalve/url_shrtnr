@@ -1,0 +1,12 @@
+%h2.text-center Create Short Url
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .panel-body
+        = form_for(:short_url, url: url_for(controller: 'short_urls', action: 'create'), html: { class: "form-create-short_url" }) do |f|
+          .form-group.text-center
+            = f.label :original_url
+            %br/
+            = f.text_field :original_url, autofocus: true, required: true, placeholder: "Enter Original Url", class: "form-control"
+          .actions
+            = f.submit "Create short_url", class: "btn btn-primary btn-block"

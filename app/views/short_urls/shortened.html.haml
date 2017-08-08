@@ -1,0 +1,18 @@
+%h2.text-center Please find the shortened URL:
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .panel-body.group-info
+        %table.table.groups-table
+          %thead
+            %tr
+              %th.text-center
+                %label The Shortened URL:
+                %a{ href: "#{@shortened_url}" }
+                  %strong=@shortened_url
+          %tbody
+            %tr
+              %th.text-center
+                %label Your Original URL:
+                %a{ href: "#{@original_url}" }
+                  %strong=@original_url

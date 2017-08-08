@@ -1,0 +1,8 @@
+development:
+  HOST_NAME: localhost
+  PORT_NUMBER: 3000
+  SLUG_LENGTH: 6
+
+production:
+  HOST_NAME: https://makeitshrt.herokuapp.com
+  SLUG_LENGTH: 6
