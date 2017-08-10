@@ -9,4 +9,24 @@
             %br/
             = f.text_field :original_url, autofocus: true, required: true, placeholder: "Enter Original Url", class: "form-control"
           .actions
-            = f.submit "Create short_url", class: "btn btn-primary btn-block"
+            = f.submit "Get Short Url", class: "btn btn-primary btn-block"
+
+%h3.text-center ---===Top 100 Most Visited URL's ===---
+.row
+  .col-lg-offset-1.col-lg-10
+    = will_paginate @short_urls
+    .panel.panel-default
+      .panel-body
+        %table.table.table-striped.groups-table
+          %thead
+            %tr
+              %th.col-xs-6.col-sm-6.col-md-6.col-lg-6 URL
+              %th.col-xs-4.col-sm-4.col-md-4.col-lg-4 Short link
+              %th.col-xs-2.col-sm-2.col-md-2.col-lg-2 Visitors Count
+          %tbody
+            - @short_urls.each do |url|
+              %tr
+                %th.col-xs-6.col-sm-6.col-md-6.col-lg-6=url.original_url
+                %td.col-xs-4.col-sm-4.col-md-4.col-lg-4=url.shortened_url
+                %td.col-xs-2.col-sm-2.col-md-2.col-lg-2=url.clicks
+    = will_paginate @short_urls

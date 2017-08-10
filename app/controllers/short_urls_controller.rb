@@ -1,6 +1,7 @@
 class ShortUrlsController < ApplicationController
   def index
-    render :index
+    @short_urls = ShortUrl.order(clicks: :desc)
+      .paginate(page: params[:page], per_page: 10, total_entries: 100)
   end
 
   def create
@@ -9,7 +10,7 @@ class ShortUrlsController < ApplicationController
     return redirect_to root_url if original_url.empty?
 
     record = ShortUrl.generate(original_url)
-    @shortened_url = shortened_url(record.short_url)
+    @shortened_url = record.shortened_url
     @original_url = record.original_url
 
     render :shortened, status: 201
@@ -30,13 +31,5 @@ class ShortUrlsController < ApplicationController
 
     def url_params
       params.require(:short_url).permit(:original_url)
-    end
-
-    def shortened_url(short_url)
-      if Rails.env.production?
-        "#{ENV['HOST_NAME']}/#{short_url}"
-      else
-        "#{ENV['HOST_NAME']}:#{ENV['PORT_NUMBER']}/#{short_url}"
-      end
     end
 end
